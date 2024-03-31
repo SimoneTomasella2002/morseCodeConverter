@@ -1,14 +1,26 @@
-#include <iostream>
+#include "header.h"
 
-using namespace std;
-
-void addChar(string &str, string toAdd);
-
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc > 2) {
+        std::cout << "Error, more than one command line argument was written";
+        return EXIT_FAILURE;
+    }
+    if (argc == 2 && ((argv[1] != "-mn") || (argv[1] != "-nm"))) {
+        std::cout << "Error, you can choose argument -mn or -nm";
+        return EXIT_FAILURE;
+    } 
+    
+    if (argv[1] == "-mn") fromMorseToNat();
+    else if (argv[1] == "-nm") fromNatToMorse();
+    else startMenu();
+
+    return EXIT_SUCCESS;
+
+
     string code;
 
-    cout << "Salve, questo programma ti converte un linguaggio morse in un linguaggio naturale, prego inserisci di seguito il testo:\n";
+    std::cout << "Salve, questo programma ti converte un linguaggio morse in un linguaggio naturale, prego inserisci di seguito il testo:\n";
     getline(cin, code);
 
     string convertedCode = "";
@@ -25,155 +37,9 @@ int main()
         }
     }
 
-    cout << convertedCode << endl;
+    std::cout << convertedCode << endl;
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
-void addChar(string &str, string toAdd)
-{
-    if (toAdd == ".-")
-    {
-        str.append("A");
-    }
-    else if (toAdd == "-...")
-    {
-        str.append("B");
-    }
-    else if (toAdd == "-.-.")
-    {
-        str.append("C");
-    }
-    else if (toAdd == "-..")
-    {
-        str.append("D");
-    }
-    else if (toAdd == ".")
-    {
-        str.append("E");
-    }
-    else if (toAdd == "..-.")
-    {
-        str.append("F");
-    }
-    else if (toAdd == "--.")
-    {
-        str.append("G");
-    }
-    else if (toAdd == "....")
-    {
-        str.append("H");
-    }
-    else if (toAdd == "..")
-    {
-        str.append("I");
-    }
-    else if (toAdd == ".---")
-    {
-        str.append("J");
-    }
-    else if (toAdd == "-.-")
-    {
-        str.append("K");
-    }
-    else if (toAdd == ".-..")
-    {
-        str.append("L");
-    }
-    else if (toAdd == "--")
-    {
-        str.append("M");
-    }
-    else if (toAdd == "-.")
-    {
-        str.append("N");
-    }
-    else if (toAdd == "---")
-    {
-        str.append("O");
-    }
-    else if (toAdd == ".--.")
-    {
-        str.append("P");
-    }
-    else if (toAdd == "--.-")
-    {
-        str.append("Q");
-    }
-    else if (toAdd == ".-.")
-    {
-        str.append("R");
-    }
-    else if (toAdd == "...")
-    {
-        str.append("S");
-    }
-    else if (toAdd == "-")
-    {
-        str.append("T");
-    }
-    else if (toAdd == "..-")
-    {
-        str.append("U");
-    }
-    else if (toAdd == "...-")
-    {
-        str.append("V");
-    }
-    else if (toAdd == ".--")
-    {
-        str.append("W");
-    }
-    else if (toAdd == "-..-")
-    {
-        str.append("X");
-    }
-    else if (toAdd == "-.--")
-    {
-        str.append("Y");
-    }
-    else if (toAdd == "--..")
-    {
-        str.append("Z");
-    }
-    else if (toAdd == ".----")
-    {
-        str.append("1");
-    }
-    else if (toAdd == "..---")
-    {
-        str.append("2");
-    }
-    else if (toAdd == "...--")
-    {
-        str.append("3");
-    }
-    else if (toAdd == "....-")
-    {
-        str.append("4");
-    }
-    else if (toAdd == ".....")
-    {
-        str.append("5");
-    }
-    else if (toAdd == "-....")
-    {
-        str.append("6");
-    }
-    else if (toAdd == "--...")
-    {
-        str.append("7");
-    }
-    else if (toAdd == "---..")
-    {
-        str.append("8");
-    }
-    else if (toAdd == "----.")
-    {
-        str.append("9");
-    }
-    else if (toAdd == "-----")
-    {
-        str.append("0");
-    }
-}
+
