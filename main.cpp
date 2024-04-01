@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
     return EXIT_SUCCESS;
 
-
+/*
     string code;
 
     std::cout << "Salve, questo programma ti converte un linguaggio morse in un linguaggio naturale, prego inserisci di seguito il testo:\n";
@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
     std::cout << convertedCode << endl;
 
     return EXIT_SUCCESS;
+*/
 }
 
 
