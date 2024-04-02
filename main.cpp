@@ -6,13 +6,13 @@ int main(int argc, char* argv[])
         std::cout << "Error, more than one command line argument was written";
         return EXIT_FAILURE;
     }
-    if (argc == 2 && ((argv[1] != "-mn") || (argv[1] != "-nm"))) {
+    if (argc == 2 && ((string(argv[1]) != "-mn") || (string(argv[1]) != "-nm"))) {
         std::cout << "Error, you can choose argument -mn or -nm";
         return EXIT_FAILURE;
     } 
     
-    if (argv[1] == "-mn") fromMorseToNat();
-    else if (argv[1] == "-nm") fromNatToMorse();
+    if (argc == 2 && (string(argv[1]) == "-mn")) fromMorseToNat();
+    else if (argc == 2 && (string(argv[1]) == "-nm")) fromNatToMorse();
     else startMenu();
 
     return EXIT_SUCCESS;

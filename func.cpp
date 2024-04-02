@@ -8,11 +8,11 @@ void startMenu() {
         
         cout << ((choice == INITIALIZER_CHOICE) 
             ? "Salve, questo programma ti permette di convertire il codice morse in linguaggio naturale o viceversa, prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire):" 
-            : "Prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire):");
+            : "Prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire): ");
         
         cin >> choice;
 
-        while (choice != EXIT_CHOICE || choice != FROM_NAT_TO_MORSE || choice != FROM_MORSE_TO_NAT) {
+        while (choice != EXIT_CHOICE && choice != FROM_NAT_TO_MORSE && choice != FROM_MORSE_TO_NAT) {
             cout << "Hai scelto un valore non valido, prego riprovare: ";
             cin >> choice;
         }
