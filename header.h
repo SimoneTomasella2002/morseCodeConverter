@@ -9,7 +9,7 @@
 
     using namespace std;
 
-    char addChar(string toAdd);
+    string addChar(string toAdd);
 
     //TODO
     void fromMorseToNat();

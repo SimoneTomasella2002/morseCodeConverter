@@ -3,7 +3,7 @@
 void startMenu() {
     int choice;
     
-    cout << "Salve, questo programma ti permette di convertire il codice morse in linguaggio naturale o viceversa, prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire):";
+    cout << "Salve, questo programma ti permette di convertire il codice morse in linguaggio naturale o viceversa.\n";
 
     while (true) {
         cout << "Prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire): ";
@@ -28,23 +28,23 @@ void fromMorseToNat() {
     string inputText = "";
     string finalText = "";
     
-    cout << "__ Modalità Morse -> linguaggio naturale __";
+    cout << "\n\n__ Modalità Morse -> linguaggio naturale __\n";
 
     while (true) {
         cout << "Prego inserire la stringa da tradurre (cliccare su ESC e premere invio per tornare al menu principale):\n";
-        cin >> inputText;
+        getline(cin, inputText);
 
         while (inputText.empty()) {
             cout << "Errore: non puoi tradurre una stringa vuota, riprovare: \n";
-            cin >> inputText;
+            getline(cin, inputText);
         }
 
-        if (inputText[0] == '\e') break;
+        if (inputText[0] == 27) break;
 
         finalText = convertFromMorseToNat(inputText);
 
         cout << (finalText.empty() 
-            ? "Errore: un carattere non appartenente al codice morse è stato inserito" 
+            ? "Errore: un carattere non appartenente al codice morse è stato inserito \n" 
             : finalText) 
             << endl;
 
@@ -61,9 +61,9 @@ string convertFromMorseToNat(string str) {
 
     // TODO Controllo errore
 
-    int pos = 0
-    for (int i = 0; i < str.length(); ++i) {
-        if (str[i] == ' ' || str[i] == '\n') {
+    int pos = 0;
+    for (unsigned int i = 0; i < str.length(); ++i) {
+        if (str[i] == ' ' || str[i] == '\0') {
             convertedText.append(addChar(str.substr(pos, i - pos)));
             pos = i;
         }
@@ -83,43 +83,44 @@ void fromNatToMorse() {
     return;
 }
 
-char addChar(string toAdd)
+string addChar(string toAdd)
 {
-    if (toAdd == ".-") return 'A';
-    else if (toAdd == "-...") return 'B';
-    else if (toAdd == "-.-.") return 'C';
-    else if (toAdd == "-..") str.append("D");
-    else if (toAdd == ".") str.append("E");
-    else if (toAdd == "..-.") str.append("F");
-    else if (toAdd == "--.") str.append("G");
-    else if (toAdd == "....") str.append("H");
-    else if (toAdd == "..") str.append("I");
-    else if (toAdd == ".---") str.append("J");
-    else if (toAdd == "-.-") str.append("K");
-    else if (toAdd == ".-..") str.append("L");
-    else if (toAdd == "--") str.append("M");
-    else if (toAdd == "-.") str.append("N");
-    else if (toAdd == "---") str.append("O");
-    else if (toAdd == ".--.") str.append("P");
-    else if (toAdd == "--.-") str.append("Q");
-    else if (toAdd == ".-.") str.append("R");
-    else if (toAdd == "...") str.append("S");
-    else if (toAdd == "-") str.append("T");
-    else if (toAdd == "..-") str.append("U");
-    else if (toAdd == "...-") str.append("V");
-    else if (toAdd == ".--") str.append("W");
-    else if (toAdd == "-..-") str.append("X");
-    else if (toAdd == "-.--") str.append("Y");
-    else if (toAdd == "--..") str.append("Z");
-    else if (toAdd == ".----") str.append("1");
-    else if (toAdd == "..---") str.append("2");
-    else if (toAdd == "...--") str.append("3");
-    else if (toAdd == "....-") str.append("4");
-    else if (toAdd == ".....") str.append("5");
-    else if (toAdd == "-....") str.append("6");
-    else if (toAdd == "--...") str.append("7");
-    else if (toAdd == "---..") str.append("8");
-    else if (toAdd == "----.") str.append("9");
-    else if (toAdd == "-----") str.append("0");
+    if (toAdd == ".-") return "A";
+    else if (toAdd == "-...") return "B";
+    else if (toAdd == "-.-.") return "C";
+    else if (toAdd == "-..") return "D";
+    else if (toAdd == ".") return "E";
+    else if (toAdd == "..-.") return "F";
+    else if (toAdd == "--.") return "G";
+    else if (toAdd == "....") return "H";
+    else if (toAdd == "..") return "I";
+    else if (toAdd == ".---") return "J";
+    else if (toAdd == "-.-") return "K";
+    else if (toAdd == ".-..") return "L";
+    else if (toAdd == "--") return "M";
+    else if (toAdd == "-.") return "N";
+    else if (toAdd == "---") return "O";
+    else if (toAdd == ".--.") return "P";
+    else if (toAdd == "--.-") return "Q";
+    else if (toAdd == ".-.") return "R";
+    else if (toAdd == "...") return "S";
+    else if (toAdd == "-") return "T";
+    else if (toAdd == "..-") return "U";
+    else if (toAdd == "...-") return "V";
+    else if (toAdd == ".--") return "W";
+    else if (toAdd == "-..-") return "X";
+    else if (toAdd == "-.--") return "Y";
+    else if (toAdd == "--..") return "Z";
+    else if (toAdd == ".----") return "1";
+    else if (toAdd == "..---") return "2";
+    else if (toAdd == "...--") return "3";
+    else if (toAdd == "....-") return "4";
+    else if (toAdd == ".....") return "5";
+    else if (toAdd == "-....") return "6";
+    else if (toAdd == "--...") return "7";
+    else if (toAdd == "---..") return "8";
+    else if (toAdd == "----.") return "9";
+    else if (toAdd == "-----") return "0";
+    else return "";
 }
   
