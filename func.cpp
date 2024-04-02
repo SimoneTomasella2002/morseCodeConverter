@@ -1,14 +1,12 @@
 #include "header.h"
 
-//TODO
 void startMenu() {
-    int choice = INITIALIZER_CHOICE;
+    int choice;
     
-    while (choice != EXIT_CHOICE) {
-        
-        cout << ((choice == INITIALIZER_CHOICE) 
-            ? "Salve, questo programma ti permette di convertire il codice morse in linguaggio naturale o viceversa, prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire):" 
-            : "Prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire): ");
+    cout << "Salve, questo programma ti permette di convertire il codice morse in linguaggio naturale o viceversa, prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire):";
+
+    while (true) {
+        cout << "Prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire): ";
         
         cin >> choice;
 
@@ -17,7 +15,8 @@ void startMenu() {
             cin >> choice;
         }
 
-        if (choice == FROM_NAT_TO_MORSE) fromNatToMorse();
+        if (choice == EXIT_CHOICE) break;
+        else if (choice == FROM_NAT_TO_MORSE) fromNatToMorse();
         else if (choice == FROM_MORSE_TO_NAT) fromMorseToNat();
     }
     
@@ -26,19 +25,69 @@ void startMenu() {
 
 //TODO
 void fromMorseToNat() {
+    string inputText = "";
+    string finalText = "";
+    
+    cout << "__ Modalità Morse -> linguaggio naturale __";
 
+    while (true) {
+        cout << "Prego inserire la stringa da tradurre (cliccare su ESC e premere invio per tornare al menu principale):\n";
+        cin >> inputText;
+
+        while (inputText.empty()) {
+            cout << "Errore: non puoi tradurre una stringa vuota, riprovare: \n";
+            cin >> inputText;
+        }
+
+        if (inputText[0] == '\e') break;
+
+        finalText = convertFromMorseToNat(inputText);
+
+        cout << (finalText.empty() 
+            ? "Errore: un carattere non appartenente al codice morse è stato inserito" 
+            : finalText) 
+            << endl;
+
+        inputText = "";
+        finalText = "";
+    }
+
+    return;
+}
+
+
+string convertFromMorseToNat(string str) {
+    string convertedText = "";
+
+    // TODO Controllo errore
+
+    int pos = 0
+    for (int i = 0; i < str.length(); ++i) {
+        if (str[i] == ' ' || str[i] == '\n') {
+            convertedText.append(addChar(str.substr(pos, i - pos)));
+            pos = i;
+        }
+    }
+
+    return convertedText;
 }
 
 //TODO
 void fromNatToMorse() {
+    cout << "__ Modalità linguaggio naturale -> Morse __";
 
+    while (true) {
+
+    }
+
+    return;
 }
 
-void addChar(string &str, string toAdd)
+char addChar(string toAdd)
 {
-    if (toAdd == ".-") str.append("A");
-    else if (toAdd == "-...") str.append("B");
-    else if (toAdd == "-.-.") str.append("C");
+    if (toAdd == ".-") return 'A';
+    else if (toAdd == "-...") return 'B';
+    else if (toAdd == "-.-.") return 'C';
     else if (toAdd == "-..") str.append("D");
     else if (toAdd == ".") str.append("E");
     else if (toAdd == "..-.") str.append("F");
