@@ -62,10 +62,10 @@ string convertFromMorseToNat(string str) {
     // TODO Controllo errore
 
     int pos = 0;
-    for (unsigned int i = 0; i < str.length(); ++i) {
+    for (unsigned int i = 0; i <= str.length(); ++i) {
         if (str[i] == ' ' || str[i] == '\0') {
             convertedText.append(addChar(str.substr(pos, i - pos)));
-            pos = i;
+            pos = i + 1;
         }
     }
 
