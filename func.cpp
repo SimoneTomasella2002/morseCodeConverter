@@ -7,7 +7,6 @@ void startMenu() {
 
     while (true) {
         cout << "Prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire): ";
-        
         cin >> choice;
 
         while (choice != EXIT_CHOICE && choice != FROM_NAT_TO_MORSE && choice != FROM_MORSE_TO_NAT) {
@@ -25,8 +24,7 @@ void startMenu() {
 
 //TODO
 void fromMorseToNat() {
-    string inputText = "";
-    string finalText = "";
+    string inputText, finalText = "";
     
     cout << "\n\n__ Modalità Morse -> linguaggio naturale __\n";
 
@@ -39,32 +37,70 @@ void fromMorseToNat() {
             getline(cin, inputText);
         }
 
-        if (inputText[0] == 27) break;
+        if (inputText[0] == ESC_BUTTON) break;
 
-        finalText = convertFromMorseToNat(inputText);
+        // The following code assumes that convertFromMorseToNat returns a string if everthing went ok, if not it returns empty strng
+        if ((finalText = convertFromMorseToNat(inputText)).empty()) cout << finalText << endl;
 
-        cout << (finalText.empty() 
-            ? "Errore: un carattere non appartenente al codice morse è stato inserito \n" 
-            : finalText) 
-            << endl;
-
-        inputText = "";
-        finalText = "";
+        inputText, finalText = "";
     }
 
     return;
 }
 
+//TODO
+void fromNatToMorse() {
+    string inputText, finalText = "";
+
+    cout << "\n\n__ Modalità linguaggio naturale -> Morse __\n";
+
+    while (true) {
+        cout << "Prego inserire la stringa da convertire in morse (cliccare su ESC e premere INVIO per tornare al menu principale): \n";
+        getline(cin, inputText);
+
+        while(inputText.empty()) {
+            cout << "Errore: non puoi tradurre una stringa vuota, riprovare: \n";
+            getline(cin, inputText);
+        }
+
+        if (inputText[0] == ESC_BUTTON) break;
+
+        if ((finalText = convertFromNatToMorse(inputText)).empty()) cout << finalText << endl;
+
+        inputText, finalText = "";
+    }
+
+    return;
+}
+
+//TODO
+string convertFromNatToMorse(string str) {
+    string convertedText = "";
+
+    for(unsigned int i = 0; i <= str.length(); ++i) {
+        //TODO Error checking missing
+
+        if (str[i] == ' ') ++i;
+        if (str[i] == '\0') break;
+
+        convertedText.append(addMorseChar(str[i]));
+    }
+
+    return convertedText; 
+}
 
 string convertFromMorseToNat(string str) {
     string convertedText = "";
 
-    // TODO Controllo errore
-
     int pos = 0;
     for (unsigned int i = 0; i <= str.length(); ++i) {
+        if (str[i] != '.' && str[i] != '-' && str[i] != ' ' && str[i] != '\0') {
+            cout << "Errore: Trovato un carattere non supportato\n";
+            return "";
+        }
+        
         if (str[i] == ' ' || str[i] == '\0') {
-            convertedText.append(addChar(str.substr(pos, i - pos)));
+            convertedText.append(addNatChar(str.substr(pos, i - pos)));
             pos = i + 1;
         }
     }
@@ -72,18 +108,7 @@ string convertFromMorseToNat(string str) {
     return convertedText;
 }
 
-//TODO
-void fromNatToMorse() {
-    cout << "__ Modalità linguaggio naturale -> Morse __";
-
-    while (true) {
-
-    }
-
-    return;
-}
-
-string addChar(string toAdd)
+string addNatChar(string toAdd)
 {
     if (toAdd == ".-") return "A";
     else if (toAdd == "-...") return "B";
@@ -123,4 +148,7 @@ string addChar(string toAdd)
     else if (toAdd == "-----") return "0";
     else return "";
 }
-  
+
+string addMorseChar(string toAdd){
+
+}
