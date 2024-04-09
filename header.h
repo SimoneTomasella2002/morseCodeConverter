@@ -12,7 +12,7 @@
 
     string addNatChar(string toAdd);
 
-    string addMorseChar(char toAdd);
+    string addMorseChar(string toAdd);
 
     //TODO
     void fromMorseToNat();

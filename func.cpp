@@ -42,7 +42,8 @@ void fromMorseToNat() {
         // The following code assumes that convertFromMorseToNat returns a string if everthing went ok, if not it returns empty strng
         if ((finalText = convertFromMorseToNat(inputText)).empty()) cout << finalText << endl;
 
-        inputText, finalText = "";
+        inputText = "";
+        finalText = "";
     }
 
     return;
@@ -67,7 +68,8 @@ void fromNatToMorse() {
 
         if ((finalText = convertFromNatToMorse(inputText)).empty()) cout << finalText << endl;
 
-        inputText, finalText = "";
+        inputText = "";
+        finalText = "";
     }
 
     return;
@@ -83,7 +85,7 @@ string convertFromNatToMorse(string str) {
         if (str[i] == ' ') ++i;
         if (str[i] == '\0') break;
 
-        convertedText.append(addMorseChar(str[i]));
+        convertedText.append(addMorseChar(to_string(str[i])) + " ");
     }
 
     return convertedText; 
@@ -150,5 +152,41 @@ string addNatChar(string toAdd)
 }
 
 string addMorseChar(string toAdd){
-
+    if (toAdd == "A") return ".-";
+    else if (toAdd == "B") return "-...";
+    else if (toAdd == "C") return "-.-.";
+    else if (toAdd == "D") return "-..";
+    else if (toAdd == "E") return ".";
+    else if (toAdd == "F") return "..-.";
+    else if (toAdd == "G") return "--.";
+    else if (toAdd == "H") return "....";
+    else if (toAdd == "I") return "..";
+    else if (toAdd == "J") return ".---";
+    else if (toAdd == "K") return "-.-";
+    else if (toAdd == "L") return ".-..";
+    else if (toAdd == "M") return "--";
+    else if (toAdd == "N") return "-.";
+    else if (toAdd == "O") return "---";
+    else if (toAdd == "P") return ".--.";
+    else if (toAdd == "Q") return "--.-";
+    else if (toAdd == "R") return ".-.";
+    else if (toAdd == "S") return "...";
+    else if (toAdd == "T") return "-";
+    else if (toAdd == "U") return "..-";
+    else if (toAdd == "V") return "...-";
+    else if (toAdd == "W") return ".--";
+    else if (toAdd == "X") return "-..-";
+    else if (toAdd == "Y") return "-.--";
+    else if (toAdd == "Z") return "--..";
+    else if (toAdd == "1") return ".----";
+    else if (toAdd == "2") return "..---";
+    else if (toAdd == "3") return "...--";
+    else if (toAdd == "4") return "....-";
+    else if (toAdd == "5") return ".....";
+    else if (toAdd == "6") return "-....";
+    else if (toAdd == "7") return "--...";
+    else if (toAdd == "8") return "----.";
+    else if (toAdd == "9") return "----.";
+    else if (toAdd == "0") return "-----";
+    else return "";
 }
