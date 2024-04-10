@@ -24,15 +24,13 @@
     extern unordered_map<string, string> fromMorseToNatMap;
     extern unordered_map<char, string> fromNatToMorseMap;
 
+    void selectedMode(int mode);
 
-    //TODO
-    void fromMorseToNat();
+
     //TODO
     string convertFromMorseToNat(string str);
     //TODO
     string convertFromNatToMorse(string str);
-    //TODO
-    void fromNatToMorse();
     void startMenu();
 
 #endif

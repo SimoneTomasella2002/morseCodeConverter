@@ -14,9 +14,12 @@ int main(int argc, char* argv[])
         return EXIT_FAILURE;
     } 
     
+    /*
     if (argc == 2 && (string(argv[1]) == "-mn")) fromMorseToNat();
     else if (argc == 2 && (string(argv[1]) == "-nm")) fromNatToMorse();
     else startMenu();
+    */
+    startMenu();
 
     return EXIT_SUCCESS;
 }
@@ -37,27 +40,32 @@ void startMenu() {
         }
 
         if (choice == EXIT_CHOICE) break;
-        else if (choice == FROM_NAT_TO_MORSE) fromNatToMorse();
-        else if (choice == FROM_MORSE_TO_NAT) fromMorseToNat();
+        else if (choice == FROM_NAT_TO_MORSE || choice == FROM_MORSE_TO_NAT) selectedMode(choice);
     }
     
     return;
 }
 
+void selectedMode(int mode) {
 
-//TODO
-void fromMorseToNat() {
-    // Cin buffer is not cleaned correctly, following code cleans it manually 
+    if (mode != FROM_MORSE_TO_NAT && mode != FROM_NAT_TO_MORSE) {
+        cout << "Fatal error: a bad mode has been selected!\n";
+        return;
+    }
+    
     cin.ignore();
 
     string inputText, finalText = "";
-    
-    cout << "\n\n__ Modalità Morse -> linguaggio naturale __\n";
+
+    cout << (mode == FROM_MORSE_TO_NAT
+        ? "\n\n__ Modalità Morse -> Linguaggio Naturale __\n"
+        : "\n\n__ Linguaggio Naturale -> Modalità Morse\n"
+    );
 
     while (true) {
         cout << "Prego inserire la stringa da tradurre (cliccare su ESC e premere invio per tornare al menu principale):\n";
         getline(cin, inputText);
-
+    
         while (inputText.empty()) {
             cout << "Errore: non puoi tradurre una stringa vuota, riprovare: \n";
             getline(cin, inputText);
@@ -65,38 +73,12 @@ void fromMorseToNat() {
 
         if (inputText[0] == ESC_BUTTON) break;
 
-        // The following code assumes that convertFromMorseToNat returns a string if everthing went ok, if not it returns empty strng
-        if (!(finalText = convertFromMorseToNat(inputText)).empty()) cout << finalText << endl;
-
-        inputText = "";
-        finalText = "";
-    }
-
-    return;
-}
-
-//TODO
-void fromNatToMorse() {
-    // Cin buffer is not cleaned correctly, following code cleans it manually 
-    cin.ignore();
-    
-    string inputText, finalText = "";
-
-    cout << "\n\n__ Modalità linguaggio naturale -> Morse __\n";
-
-    while (true) {
-        cout << "Prego inserire la stringa da convertire in morse (cliccare su ESC e premere INVIO per tornare al menu principale): \n";
-        getline(cin, inputText);
-
-        while(inputText.empty()) {
-            cout << "Errore: non puoi tradurre una stringa vuota, riprovare: \n";
-            getline(cin, inputText);
+        if (mode == FROM_MORSE_TO_NAT) {
+            if (!(finalText = convertFromMorseToNat(inputText)).empty()) cout << finalText << endl;
         }
-
-        if (inputText[0] == ESC_BUTTON) break;
-
-        if (!(finalText = convertFromNatToMorse(inputText)).empty()) cout << finalText << endl;
-
+        else
+            if (!(finalText = convertFromNatToMorse(inputText)).empty()) cout << finalText << endl;
+    
         inputText = "";
         finalText = "";
     }
