@@ -1,15 +1,15 @@
 #include "header.h"
 
-//TODO
 string convertFromNatToMorse(string str) {
     string convertedText = "";
 
     for (unsigned int i = 0; i <= str.length(); ++i) {
+        str[i] = toupper(str[i]);
+        
         if ((str[i] < LOWER_NUMBER_BOUND || str[i] > UPPER_NUMBER_BOUND) 
             && (str[i] < LOWER_LETTER_BOUND || str[i] > UPPER_LETTER_BOUND) 
             && str[i] != ' ' && str[i] != '\0')
         {
-
             cout << "Errore: Trovato un carattere non supportato\n";
             return "";
         }

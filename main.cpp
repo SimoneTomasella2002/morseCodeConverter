@@ -5,21 +5,32 @@ unordered_map<char, string> fromNatToMorseMap = generateNatToMorseMap();
 
 int main(int argc, char* argv[])
 {
-    if (argc > 2) {
+    // Argument checking
+    if (argc > 3) {
         std::cout << "Error, more than one command line argument was written";
         return EXIT_FAILURE;
     }
-    if (argc == 2 && ((string(argv[1]) != "-mn") || (string(argv[1]) != "-nm"))) {
+    if (argc == 2){
+        std::cout << "Error, you must choose a string to convert as second argument";
+        return EXIT_FAILURE;
+    }
+    if (argc == 3 && ((string(argv[1]) != "-mn") && (string(argv[1]) != "-nm"))) {
         std::cout << "Error, you can choose argument -mn or -nm";
         return EXIT_FAILURE;
     } 
     
-    /*
-    if (argc == 2 && (string(argv[1]) == "-mn")) fromMorseToNat();
-    else if (argc == 2 && (string(argv[1]) == "-nm")) fromNatToMorse();
-    else startMenu();
-    */
-    startMenu();
+    if (argc == 3 && (string(argv[1]) == "-mn")) {
+        string ret = convertFromMorseToNat((string)argv[2]);
+        if (!ret.empty()) cout << ret << endl;
+        return EXIT_SUCCESS;
+    }
+    else if (argc == 3 && (string(argv[1]) == "-nm")) {
+        string ret = convertFromNatToMorse((string)argv[2]);
+        if (!ret.empty()) cout << ret << endl;
+        return EXIT_SUCCESS;
+    }
+    else 
+        startMenu();
 
     return EXIT_SUCCESS;
 }
@@ -31,7 +42,7 @@ void startMenu() {
     cout << "Salve, questo programma ti permette di convertire il codice morse in linguaggio naturale o viceversa.\n";
 
     while (true) {
-        cout << "Prego scegliere la modalità (1 per convertire da naturale a morse, 2 per convertire da morse a naturale, 0 per uscire): ";
+        cout << "\n__ Menu' principale __\n\t- 1 per convertire da naturale a morse\n\t- 2 per convertire da morse a naturale\n\t- 0 per uscire\nScegliere la modalita': ";
         cin >> choice;
 
         while (choice != EXIT_CHOICE && choice != FROM_NAT_TO_MORSE && choice != FROM_MORSE_TO_NAT) {
@@ -55,14 +66,14 @@ void selectedMode(int mode) {
     
     cin.ignore();
 
-    string inputText, finalText = "";
-
     cout << (mode == FROM_MORSE_TO_NAT
         ? "\n\n__ Modalità Morse -> Linguaggio Naturale __\n"
-        : "\n\n__ Linguaggio Naturale -> Modalità Morse\n"
+        : "\n\n__ Linguaggio Naturale -> Modalità Morse __\n"
     );
 
     while (true) {
+        string inputText, finalText = "";
+        
         cout << "Prego inserire la stringa da tradurre (cliccare su ESC e premere invio per tornare al menu principale):\n";
         getline(cin, inputText);
     
@@ -73,14 +84,9 @@ void selectedMode(int mode) {
 
         if (inputText[0] == ESC_BUTTON) break;
 
-        if (mode == FROM_MORSE_TO_NAT) {
-            if (!(finalText = convertFromMorseToNat(inputText)).empty()) cout << finalText << endl;
-        }
-        else
-            if (!(finalText = convertFromNatToMorse(inputText)).empty()) cout << finalText << endl;
-    
-        inputText = "";
-        finalText = "";
+        finalText = (mode == FROM_MORSE_TO_NAT ? convertFromMorseToNat(inputText) : convertFromNatToMorse(inputText)); 
+
+        if (!finalText.empty()) cout << finalText << endl;
     }
 
     return;
