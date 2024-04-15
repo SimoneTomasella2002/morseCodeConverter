@@ -1,7 +1,7 @@
 #include "header.h"
 
 unordered_map<string, string> fromMorseToNatMap = generateMorseToNatMap();
-unordered_map<char, string> fromNatToMorseMap = generateNatToMorseMap();
+unordered_map<string, string> fromNatToMorseMap = generateNatToMorseMap();
 
 int main(int argc, char* argv[])
 {
