@@ -5,13 +5,14 @@ unordered_map<char, string> fromNatToMorseMap = generateNatToMorseMap();
 
 int main(int argc, char* argv[])
 {
+
     // Argument checking
-    if (argc > 3) {
-        std::cout << "Error, more than one command line argument was written";
-        return EXIT_FAILURE;
-    }
     if (argc == 2){
         std::cout << "Error, you must choose a string to convert as second argument";
+        return EXIT_FAILURE;
+    }
+    if (argc > 3) {
+        std::cout << "Error, more than three arguments are passed";
         return EXIT_FAILURE;
     }
     if (argc == 3 && ((string(argv[1]) != "-mn") && (string(argv[1]) != "-nm"))) {
@@ -19,6 +20,7 @@ int main(int argc, char* argv[])
         return EXIT_FAILURE;
     } 
     
+    // Checking arguments for different modes
     if (argc == 3 && (string(argv[1]) == "-mn")) {
         string ret = convertFromMorseToNat((string)argv[2]);
         if (!ret.empty()) cout << ret << endl;
@@ -29,9 +31,8 @@ int main(int argc, char* argv[])
         if (!ret.empty()) cout << ret << endl;
         return EXIT_SUCCESS;
     }
-    else 
-        startMenu();
 
+    startMenu();
     return EXIT_SUCCESS;
 }
 
