@@ -1,4 +1,5 @@
 main:
+	rm -f morse.out
 	g++ *.cpp -Wall -Werror -Wpedantic -o morse.out
 
 launch:
