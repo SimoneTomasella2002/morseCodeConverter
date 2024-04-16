@@ -17,12 +17,12 @@
 
     string addNatChar(string toAdd);
 
-    string addMorseChar(char toAdd);
+    string addMorseChar(string toAdd);
 
     unordered_map<string, string> generateMorseToNatMap();
-    unordered_map<char, string> generateNatToMorseMap();
+    unordered_map<string, string> generateNatToMorseMap();
     extern unordered_map<string, string> fromMorseToNatMap;
-    extern unordered_map<char, string> fromNatToMorseMap;
+    extern unordered_map<string, string> fromNatToMorseMap;
 
     void startMenu();
     void selectedMode(int mode);

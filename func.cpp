@@ -17,7 +17,7 @@ string convertFromNatToMorse(string str) {
         if (str[i] == ' ') ++i;
         if (str[i] == '\0') break;
 
-        convertedText.append(addMorseChar(str[i]) + " ");
+        convertedText.append(addMorseChar(string(str[i], 1) + " "));
     }
 
     return convertedText; 
@@ -48,7 +48,7 @@ string addNatChar(string toAdd)
     return (ret == fromMorseToNatMap.end() ? "" : ret->second);
 }
 
-string addMorseChar(char toAdd) {
+string addMorseChar(string toAdd) {
     auto ret = fromNatToMorseMap.find(toAdd);
     return (ret == fromNatToMorseMap.end() ? "" : ret->second);
 }
